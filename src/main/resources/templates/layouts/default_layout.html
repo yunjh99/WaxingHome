@@ -1,10 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8" />
+    <title layout:title-pattern="스몰왁싱 | $CONTENT_TITLE">스몰왁싱</title>
+
+    <!-- 공통 config (CSS · JS 로드 등 설정) -->
+    <th:block th:replace="~{fragments/config :: configFragment}"></th:block>
 </head>
+
 <body>
-$END$
+
+<!-- 🔹 상단 네비게이션 -->
+<nav th:replace="~{fragments/top-nav :: topNavFragment}"></nav>
+
+<!-- 🔹 전체 레이아웃 wrapper -->
+<div class="layout-container">
+
+    <!-- 🔹 오른쪽(or 왼쪽) 사이드바 -->
+    <aside class="sidebar"
+           th:replace="~{fragments/side-nav :: sideNavFragment}">
+    </aside>
+
+    <!-- 🔹 메인 콘텐츠(페이지마다 바뀌는 부분) -->
+    <main class="content-wrapper">
+        <section layout:fragment="content">
+            <!-- 자식 템플릿에서 채워짐 -->
+        </section>
+    </main>
+
+</div>
+
+<!-- 🔹 공통 푸터 -->
+<footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+
 </body>
 </html>
