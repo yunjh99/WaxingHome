@@ -1,4 +1,30 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <!-- resources/templates/fragments/config.html -->
+
 <th:block th:fragment="configFragment">
+
+    <!-- 🔹 반응형 메타 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- 🔹 favicon -->
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+    <!-- 🔹 공통 CSS -->
+    <link rel="stylesheet" th:href="@{/css/fragments/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/fragments/top-nav.css}">
+    <link rel="stylesheet" th:href="@{/css/fragments/side-nav.css}">
+    <link rel="stylesheet" th:href="@{/css/fragments/footer.css}">
+
+    <!-- 🔹 페이지별 CSS (없으면 무시됨) -->
+    <th:block layout:fragment="pageCss"></th:block>
+
+    <!-- 🔹 공통 JS -->
+    <script th:src="@{/js/common.js}" defer></script>
+
+    <!-- 🔹 페이지별 JS (없으면 무시됨) -->
+    <th:block layout:fragment="pageScript"></th:block>
 
 </th:block>

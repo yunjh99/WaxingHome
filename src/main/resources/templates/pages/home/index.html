@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/default_layout}">
 
 <head>
-    <!-- 현재 페이지 제목만 적으면 레이아웃 제목 패턴이 적용됨 -->
     <title>메인</title>
+
+    <!-- 🔹 페이지 전용 CSS -->
+    <th:block layout:fragment="pageCss">
+        <link rel="stylesheet" th:href="@{/css/pages/home/index.css}">
+    </th:block>
 </head>
 
 <body>
-<section layout:fragment="content">
 
+<section layout:fragment="content">
     <h1>스몰왁싱 메인 페이지</h1>
     <p>여기에 메인 페이지 내용을 넣으세요.</p>
-
 </section>
+
+<!-- 🔹 페이지 전용 JS -->
+<th:block layout:fragment="pageScript">
+    <script th:src="@{/js/pages/home/index.js}" defer></script>
+</th:block>
+
 </body>
 </html>
