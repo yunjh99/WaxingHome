@@ -27,7 +27,8 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'                            // Lombok 애노테이션 처리
     testImplementation 'org.springframework.boot:spring-boot-starter-test'    // 테스트 지원
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'              // JUnit 실행 환경
-    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.0.0'   // Thymeleaf 공통 레이아웃 기능
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'   // Thymeleaf 공통 레이아웃 기능
+
 }
 
 tasks.named('test') {
