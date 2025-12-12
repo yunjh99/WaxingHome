@@ -1,0 +1,77 @@
+/* 전체 네비 영역 */
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 24px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    z-index: 100;
+}
+
+/* 로고 */
+.top-nav__logo-text {
+    font-size: 20px;
+    font-weight: 700;
+    text-decoration: none;
+    color: #333;
+}
+
+/* 1차 메뉴 */
+.top-nav__menu {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.top-nav__menu > li > a {
+    text-decoration: none;
+    color: #333;
+    font-size: 15px;
+    padding: 6px 4px;
+}
+
+.top-nav__menu > li:hover > a {
+    color: #000;
+    font-weight: 600;
+}
+
+/* 2차 메뉴 (드롭다운) */
+.gnb_depth2 {
+    display: none;
+    position: absolute;
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 8px 0;
+    list-style: none;
+    margin-top: 6px;
+    min-width: 140px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.gnb_depth2 li a {
+    display: block;
+    padding: 8px 14px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.gnb_depth2 li a:hover {
+    background: #f7f7f7;
+}
+
+/* Hover 시 2차 메뉴 열림 */
+.top-nav__menu li:hover > .gnb_depth2 {
+    display: block;
+    animation: fadeIn 0.15s ease-in;
+}
+
+/* 간단한 fade-in 효과 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
