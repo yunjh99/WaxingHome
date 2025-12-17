@@ -29,6 +29,7 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'              // JUnit 실행 환경
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'         // Thymeleaf 공통 레이아웃 기능
     developmentOnly 'org.springframework.boot:spring-boot-devtools'           // 자동 리로딩 설정
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
 
 }
 
