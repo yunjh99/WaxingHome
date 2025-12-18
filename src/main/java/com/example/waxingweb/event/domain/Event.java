@@ -1,7 +1,6 @@
 package com.example.waxingweb.event.domain;
 
 import com.example.waxingweb.user.domain.User;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
@@ -9,14 +8,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Entity
-@Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Entity // JPA 관리 대상 엔티티
+@Getter // 엔티티 조회용 Getter 제공
+@NoArgsConstructor(access = AccessLevel.PROTECTED)// JPA 프록시 생성을 위한 기본 생성자 (외부 직접 생성 제한)
+
 public class Event {
 
     @Id
