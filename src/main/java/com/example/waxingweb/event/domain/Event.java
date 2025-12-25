@@ -1,5 +1,6 @@
 package com.example.waxingweb.event.domain;
 
+import com.example.waxingweb.event.dto.EventCreateRequest;
 import com.example.waxingweb.user.domain.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -55,8 +56,9 @@ public class Event {
     @Column
     private LocalDateTime deletedAt; // 삭제일시
 
-    @Column(nullable = false)
-    private boolean visible = true; // 노출여부
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "deleted_by")
+    private User deletedBy; // 삭제한 유저
 
 
     @Column(length = 500)
@@ -64,4 +66,45 @@ public class Event {
 
     @Column(length = 500)
     private String bodyImagePath; // 본문 이미지
+
+    // 삭제
+    public void delete(User admin) {
+        if (this.deletedAt != null) return; // 또는 예외
+        this.deletedAt = LocalDateTime.now();
+        this.deletedBy = admin;
+    }
+
+    // 복구
+    public void restore() {
+        this.deletedAt = null;
+        this.deletedBy = null;
+    }
+
+    // 삭제 여부
+    @Transient
+    public boolean isDeleted() {
+        return this.deletedAt != null;
+    }
+
+    // 노출 여부
+    @Transient
+    public boolean isVisible() {
+        if (isDeleted() || startDate == null || endDate == null) return false;
+        LocalDate today = LocalDate.now();
+        return !today.isBefore(startDate) && !today.isAfter(endDate);
+    }
+
+    public static Event create(User user, String title, String content,
+                               LocalDate startDate, LocalDate endDate) {
+        Event event = new Event();
+        event.user = user;
+        event.title = title;
+        event.content = content;
+        event.startDate = startDate;
+        event.endDate = endDate;
+        return event;
+    }
+
+
 }
+
