@@ -7,6 +7,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Getter
 @Setter
 @ConfigurationProperties(prefix = "app.upload")
-public class FileProperties {
+public class FileConfig {
     private String dir;
 }

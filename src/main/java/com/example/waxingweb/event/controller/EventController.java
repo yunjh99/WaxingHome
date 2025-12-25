@@ -23,7 +23,7 @@ import java.time.LocalDate;
 public class EventController {
 
     private final EventService eventService;
-    private final FileService fileService;
+
 
     // 진행중인 이벤트
     @GetMapping
@@ -37,7 +37,7 @@ public class EventController {
     }
 
     // 종료된 이벤트
-    @GetMapping("ended")
+    @GetMapping("Expired")
     public String getEndedEvents(Model model,
                        @PageableDefault(size=8) Pageable pageable) {
 
