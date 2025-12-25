@@ -1,5 +1,6 @@
 package com.example.waxingweb.event.domain;
 
+import com.example.waxingweb.event.dto.EventCreateRequest;
 import com.example.waxingweb.user.domain.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -23,6 +24,7 @@ public class Event {
     @Column(name = "event_id")
     private Long id; //기본키
 
+
     @ManyToOne(fetch = FetchType.LAZY) // LAZY: 이벤트 조회 시 작성자 정보는 필요할 때만 조회
     @JoinColumn(name = "user_id", nullable = false)
     private User user; // 작성자
@@ -40,6 +42,9 @@ public class Event {
     @Column(nullable = false)
     private LocalDate endDate;    // 이벤트 종료일 (23:59:59까지 노출로 간주)
 
+    @Column(nullable = false)
+    private int viewCount = 0;
+
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt; // 생성일시 (수정 불가)
@@ -48,9 +53,58 @@ public class Event {
     @Column(nullable = false)
     private LocalDateTime updatedAt; // 수정일시
 
+    @Column
+    private LocalDateTime deletedAt; // 삭제일시
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "deleted_by")
+    private User deletedBy; // 삭제한 유저
+
+
     @Column(length = 500)
     private String thumbnailPath; // 썸네일
 
     @Column(length = 500)
     private String bodyImagePath; // 본문 이미지
+
+    // 삭제
+    public void delete(User admin) {
+        if (this.deletedAt != null) return; // 또는 예외
+        this.deletedAt = LocalDateTime.now();
+        this.deletedBy = admin;
+    }
+
+    // 복구
+    public void restore() {
+        this.deletedAt = null;
+        this.deletedBy = null;
+    }
+
+    // 삭제 여부
+    @Transient
+    public boolean isDeleted() {
+        return this.deletedAt != null;
+    }
+
+    // 노출 여부
+    @Transient
+    public boolean isVisible() {
+        if (isDeleted() || startDate == null || endDate == null) return false;
+        LocalDate today = LocalDate.now();
+        return !today.isBefore(startDate) && !today.isAfter(endDate);
+    }
+
+    public static Event create(User user, String title, String content,
+                               LocalDate startDate, LocalDate endDate) {
+        Event event = new Event();
+        event.user = user;
+        event.title = title;
+        event.content = content;
+        event.startDate = startDate;
+        event.endDate = endDate;
+        return event;
+    }
+
+
 }
+
