@@ -23,6 +23,7 @@ public class Event {
     @Column(name = "event_id")
     private Long id; //기본키
 
+
     @ManyToOne(fetch = FetchType.LAZY) // LAZY: 이벤트 조회 시 작성자 정보는 필요할 때만 조회
     @JoinColumn(name = "user_id", nullable = false)
     private User user; // 작성자
@@ -40,6 +41,9 @@ public class Event {
     @Column(nullable = false)
     private LocalDate endDate;    // 이벤트 종료일 (23:59:59까지 노출로 간주)
 
+    @Column(nullable = false)
+    private int viewCount = 0;
+
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt; // 생성일시 (수정 불가)
@@ -47,6 +51,13 @@ public class Event {
     @UpdateTimestamp
     @Column(nullable = false)
     private LocalDateTime updatedAt; // 수정일시
+
+    @Column
+    private LocalDateTime deletedAt; // 삭제일시
+
+    @Column(nullable = false)
+    private boolean visible = true; // 노출여부
+
 
     @Column(length = 500)
     private String thumbnailPath; // 썸네일
