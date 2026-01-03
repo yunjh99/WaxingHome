@@ -1,0 +1,148 @@
+.content {
+    margin: 0; /* 마진 제거 */
+    padding: 0; /* 패딩 제거 */
+    overflow: hidden; /* 콘텐츠가 넘치지 않도록 설정 */
+}
+
+/*헤드시작*/
+/*----------------------*/
+.commu-header {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 300px;
+    background-color: #585858;
+}
+
+/* 이미지 컨테이너 스타일 */
+.image-container {
+    position: relative;
+    width: 100%; /* 이미지 컨테이너 너비를 100%로 설정 */
+    height: 100%; /* 이미지 컨테이너 높이를 100%로 설정 */
+}
+
+.image-container img {
+    width: 100%; /* 이미지 너비를 컨테이너에 맞춤 */
+    height: 100%; /* 이미지 높이를 컨테이너에 맞춤 */
+    object-fit: cover; /* 비율을 유지하면서 컨테이너를 완전히 채움 */
+}
+
+/* 네비게이션 */
+/*-------------*/
+.commu-header-nav {
+    position: absolute; /* 부모 요소인 .image-container에 절대적으로 배치 */
+    bottom: 0px; /* 네비게이션을 이미지 컨테이너의 하단에 위치 */
+    width: 100%; /* 네비게이션이 이미지 컨테이너의 너비를 가득 채우도록 설정 */
+    text-align: center;
+}
+
+.commu-header-nav ul {
+    display: flex; /* 수평 일열로 */
+    list-style: none;
+    justify-content: center;
+    padding: 0; /* 패딩 제거 */
+    margin: 0; /* 마진 제거 */
+}
+
+.commu-header-nav li {
+    margin: 0; /* 링크들 사이의 간격 제거 */
+}
+
+.commu-header-nav a {
+    width: 120px;
+    display: inline-block;
+    text-decoration: none;
+    background-color: #333;
+    color: rgba(255, 255, 255, 0.7); /* 70% 투명한 흰색 */
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 20px;
+    transition: all 0.3s;
+    margin: 0; /* 링크들 사이의 간격 제거 */
+    border-right: 0.2px solid grey;  /* 사이에 선 추가 */
+}
+
+.commu-header-nav li:last-child a {
+    border-right: none; /* 마지막 항목의 border-right 제거 */
+}
+
+/* 호버 스타일 */
+.commu-header-nav a:hover {
+    color: rgba(255, 255, 255, 0.9); /* 90% 투명한 흰색 */
+}
+
+.commu-header-nav a.active {
+    background-color: #f8f8f8;
+    color: rgba(51, 51, 51, 0.85);
+}
+
+.commu-header-nav a.active:hover {
+    background-color: #f8f8f8;
+    color: rgba(51, 51, 51, 1);
+}
+
+/*-------------*/
+
+
+/*TITLE*/
+/*----------------------*/
+.commu-title {
+    position: relative;
+
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    height: 100%; /* 부모 요소의 높이에 맞춤 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    padding-top: 80px;
+    padding-bottom: 30px;
+
+
+    margin: 0 auto; /* 좌우 여백을 자동으로 설정하여 중앙 정렬 */
+    width: 1200px;
+    border-bottom: 2px solid #c75e5e;
+}
+
+.commu-title h1{
+    font-size: 50px;
+}
+
+.commu-title a{
+    font-size: 20px;
+    color: #c75e5e;
+}
+/*----------------------*/
+
+
+/*----- 페이징 [<][1][>] -----*/
+/*----------------------------------*/
+.pagination {
+    text-align: center;
+    margin : 20px 0;
+}
+
+.pagination a, span {
+    display: inline-block;
+    padding: 10px 15px;
+    text-decoration: none;
+}
+
+/* 번호는 중앙 정렬 */
+.pagination a:first-child {
+    background-color: #f1f1f1;
+    color: #333;
+    border: 1px solid #dddddd;
+}
+
+/* 제목은 왼쪽 정렬 */
+.pagination a:nth-child(2) {
+    background-color: white;
+    border: 1px solid #c75e5e;
+    color: #c75e5e;
+}
+
+/* 작성일은 오른쪽 정렬 */
+.pagination a:nth-child(3) {
+    background-color: #f1f1f1;
+    color: #333;
+    border: 1px solid #dddddd;
+}

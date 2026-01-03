@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default-layout}">
+<head>
+    <title>메인</title>
+    <meta name="description" content="스몰왁싱 이벤트 작성 페이지">
+    <!-- 🔹 페이지 전용 CSS -->
+    <th:block layout:fragment="pageCss">
+        <link rel="stylesheet" th:href="@{/css/pages/community/event/form.css}">
+        <link rel="stylesheet" th:href="@{/css/pages/community/common.css}">
+    </th:block>
+</head>
+<body>
+<!-- 상단 이미지 영역 fragment -->
+<section layout:fragment="section-top">
+    <div class="page-hero">
+        <!-- 이미지 없는 상단 -->
+        <div class="page-hero__no-img">
+            <nav class="page-nav">
+                <ul class="page-nav__list">
+                    <li class="page-nav__item page-nav__item--active">
+                        <a class="page-nav__link" th:href="@{/community/event/list}">이벤트</a>
+                    </li>
+                    <li class="page-nav__item">
+                        <a class="page-nav__link" th:href="@{#}">공지사항</a>
+                    </li>
+                    <li class="page-nav__item">
+                        <a class="page-nav__link" th:href="@{#}">자주묻는질문</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="page-hero__info">
+        <h1 class="page-hero__title">이벤트</h1>
+        <p class="page-hero__subtitle">EVENT</p>
+    </div>
+</section>
+<section layout:fragment="content">
+    <div class="content">
+        <!-- --- -->
+        <!-- write 공간 -->
+        <div class="post-body">
+            <div class="form-box">
+                <div class="newswriteform">
+                    <form th:action="${event == null} ? '/event/write' : '/event/update/' + ${event.id}"
+                          method="post" id="eventwriteform" enctype="multipart/form-data">
+
+                        <div class="eventswrite-container">
+
+                            <div class="input-group">
+                                <div class="input-item">
+                                    <label for="title">제목</label>
+                                    <input type="text" id="title" name="title" placeholder="소식 제목을 입력하세요"
+                                           th:value="${event != null} ? ${event.title} : ''" required> <!-- 'news'에서 'event'로 변경 -->
+                                </div>
+                            </div>
+
+                            <!-- 이벤트 진행 기간 입력 필드 추가 -->
+                            <div class="input-group">
+                                <div class="input-item">
+                                    <label for="startDate">시작 날짜</label>
+                                    <input type="date" id="startDate" name="startDate"
+                                           th:value="${event != null} ? ${event.startDate} : ''" required>
+                                </div>
+                                <div class="input-item">
+                                    <label for="endDate">종료 날짜</label>
+                                    <input type="date" id="endDate" name="endDate"
+                                           th:value="${event != null} ? ${event.endDate} : ''" required>
+                                </div>
+                            </div>
+
+
+
+                            <div class="input-group">
+                                <div class="input-item">
+                                    <label for="content">내용</label>
+                                    <textarea id="content" name="content" placeholder="썸네일 크기(570x570), 본문 이미지 크기(width:1200, height: 상관없음)"
+                                              th:text="${event != null} ? ${event.content} : ''"></textarea> <!-- 'news'에서 'event'로 변경 -->
+                                </div>
+                            </div>
+
+                            <div class="input-group no-flex">
+                                <div class="input-item">
+                                    <label>파일첨부</label>
+                                    <input type="text" id="imageInput" placeholder="최대 3개까지 업로드 가능합니다." readonly>
+                                    <label for="image" class="file-upload-label">파일 첨부</label>
+                                    <input type="file" id="image" name="image" accept="image/*" multiple style="display: none;">
+
+                                    <p id="file-warning" style="color: red; display: none;"></p>
+                                </div>
+                                <!-- 첨부된 파일 목록 표시 -->
+                                <div class="input-item">
+                                    <label></label>
+                                    <div id="fileList" class="file-list">
+                                        <ul id="existingFilesList" class="existingFiles-List">
+                                            <!-- 기존 파일 목록이 여기에 동적으로 추가됩니다. -->
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="input-item submit-button-wrapper">
+                                <button type="submit" class="submit-button" id="submit-button"
+                                        th:text="${event == null} ? '등록하기' : '수정하기'"></button> <!-- 'news'에서 'event'로 변경 -->
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- --- -->
+
+        </div>
+    </div>
+    </th:block>
+</section>
+</body>
+</html>

@@ -6,7 +6,7 @@
 
 <head>
     <title>메인</title>
-
+    <meta name="description" content="스몰왁싱 메인 페이지">
     <!-- 🔹 페이지 전용 CSS -->
     <th:block layout:fragment="pageCss">
         <link rel="stylesheet" th:href="@{/css/pages/home/index.css}">
@@ -16,39 +16,162 @@
 <body>
 
 <section layout:fragment="content">
-    <h1>스몰왁싱 메인 페이지</h1>
-    <p>여기에 메인 페이지 내용을 넣으세요.</p>
-    <p>여기에 메인 페이지 내용을 넣으세요.</p>
-    <p>여기에 메인 페이지 내용을 넣으세요.</p>
-    <p>여기에 메인 페이지 내용을 넣으세요.</p>
-    <p>여기에 메인 페이지 내용을 넣으세요.</p>
-    <p>여기에 메인 페이지 내용을 넣으세요.</p>
-    <p>여기에 메인 페이지 내용을 넣으세요.</p>
-    <p>여기에 메인 페이지 내용을 넣으세요.</p>
-    <h1>스몰왁싱 메인 페이지</h1>
-    <h1>스몰왁싱 메인 페이지</h1>
-    <h1>스몰왁싱 메인 페이지</h1>
-    <h1>스몰왁싱 메인 페이지</h1>
-    <h1>스몰왁싱 메인 페이지</h1>
-    <h1>스몰왁싱 메인 페이지</h1>
-    <h1>스몰왁싱 메인 페이지</h1>
-    <h1>스몰왁싱 메인 페이지</h1>
-    <h1>스몰왁싱 메인 페이지</h1>
-    <h1>스몰왁싱 메인 페이지</h1>
-    <h1>스몰왁싱 메인 페이지</h1>
-    <h1>스몰왁싱 메인 페이지</h1>
-    <h1>스몰왁싱 메인 페이지</h1>
-    <h1>스몰왁싱 메인 페이지</h1>
-    <h1>스몰왁싱 메인 페이지</h1>
-    <h1>스몰왁싱 메인 페이지</h1>
-    <h1>스몰왁싱 메인 페이지</h1>
-    <h1>스몰왁싱 메인 페이지</h1>
-    <h1>스몰왁싱 메인 페이지</h1>
-    <h1>스몰왁싱 메인 페이지</h1>
-    <h1>스몰왁싱 메인 페이지</h1>
-    <h1>스몰왁싱 메인 페이지</h1>
-    <h1>스몰왁싱 메인 페이지</h1>
-    <h1>스몰왁싱 메인 페이지</h1>
+    <div class="content">
+
+        <div class="image-container">
+            <img src="/img/main/main_logo_1.jpg" alt="이미지 설명" class="slide active">
+            <img src="/img/main/main_logo_3.jpg" alt="이미지 설명" class="slide">
+            <img src="/img/main/main_logo_2.jpg" alt="이미지 설명" class="slide">
+
+
+            <!-- 슬라이더 네비게이션 도트 -->
+            <div class="nav-dots">
+                <span class="dot active" data-index="0"></span>
+                <span class="dot" data-index="1"></span>
+                <span class="dot" data-index="2"></span>
+            </div>
+        </div>
+
+        <div class="middle">
+            <div class="middle-header">
+                <div class="header-item">
+                    <i class="bi bi-award"></i>
+                    <h1>스몰왁싱</h1>
+                    <h4>스몰왁싱만의<br>특별함을 만나보세요</h4>
+                    <a th:href="@{#}">알아보기</a>
+                </div>
+
+                <div class="header-item">
+                    <i class="bi bi-currency-exchange"></i>
+                    <h1>가격안내</h1>
+                    <h4>부담스럽지 않은<br>합리적인 가격을 고집합니다</h4>
+                    <a th:href="@{#}">가격보기</a>
+                </div>
+
+                <div class="header-item">
+                    <i class="bi bi-patch-question"></i>
+                    <h1>궁금해요</h1>
+                    <h4>고객님들이 자주 묻는 질문<br>빠르게 확인해보세요</h4>
+                    <a th:href="@{#}">답변보기</a>
+                </div>
+
+                <div class="header-item">
+                    <i class="bi bi-chat-dots"></i>
+                    <h1>왁싱상담</h1>
+                    <h4>스몰왁싱에 대해<br>궁금한 점을 물어보세요</h4>
+                    <a th:href="@{#}">상담하기</a>
+                </div>
+            </div>
+        </div>
+        <!-- 새로운 이미지 섹션: 4개의 이미지를 2개씩 나누어 표시 -->
+        <div class="middle-middle">
+            <h1>PEOPLE SERVICE</h1>
+            <div class="middle-img">
+                <div class="image-item">
+                    <img src="/img/main/brazilian.jpg" alt="이미지 1">
+                    <div class="overlay-background">
+                        <div class="overlay-text">Brazilian<br>Waxing</div>
+                        <div class="overlay-text-h">브라질리언왁싱</div>
+                        <div class="overlay-text-a">피부 마찰을 줄여<br>착색을 예방하는<br>인기있는 왁싱!</div>
+                        <a th:href="@{#}">More View</a>
+                    </div>
+                </div>
+                <div class="image-item">
+                    <img src="/img/main/face.jpg" alt="이미지 2">
+                    <div class="overlay-background">
+                        <div class="overlay-text">Face<br>Waxing</div>
+                        <div class="overlay-text-h">얼굴왁싱</div>
+                        <div class="overlay-text-a">잔털과 각질을<br>안전하게 제거하는<br> 페이스 왁싱!</div>
+                        <a th:href="@{#}">More View</a>
+                    </div>
+                </div>
+            </div>
+            <div class="middle-img">
+                <div class="image-item">
+                    <img src="/img/main/body.jpg" alt="이미지 3">
+                    <div class="overlay-background">
+                        <div class="overlay-text">Body<br>Waxing</div>
+                        <div class="overlay-text-h">바디왁싱</div>
+                        <div class="overlay-text-a">각질이 제거되며 <br> 피부가 부드러워지고 <br> 환해지는 왁싱!</div>
+                        <a th:href="@{#}">More View</a>
+                    </div>
+                </div>
+                <div class="image-item">
+                    <img src="/img/main/baby.jpg" alt="이미지 4">
+                    <div class="overlay-background">
+                        <div class="overlay-text">Pregnant<br>Waxing</div>
+                        <div class="overlay-text-h">임산부왁싱</div>
+                        <div class="overlay-text-a">출산전·후 쾌적하게<br>상태를 유지하는<br> 안전한 임산부 왁싱!</div>
+                        <a th:href="@{#}">More View</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mb">
+            <h1>About PEOPLE</h1>
+            <div class="mbimg-container">
+
+                <div class="overlayimg-item">
+                    <img src="/img/main/green.png" alt="이미지 2">
+                    <div class="title-overlay"><h3>SAFETY</h3></div>
+                    <div class="background-overlay2">
+                        <div class="text-overlay">
+                            <h3>SAFETY</h3>
+                            <h5>'노더블딥'을 준수하여<br> 위생적이고 안전하게</h5>
+                            <h6>고객님의 안전과 청결을 위해서 <br> 1회용 스틱, 장갑, 마스크를 사용해요.</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="overlayimg-item">
+                    <img src="/img/main/twoex.jpg" alt="이미지 3">
+                    <div class="title-overlay"><h3>PROFESSIONAL</h3></div>
+                    <div class="background-overlay3">
+                        <div class="text-overlay">
+                            <h3>PROFESSIONAL</h3>
+                            <h5>체계적인 관리 시스템으로<br>전문적인 교육에 풍부한 경험</h5>
+                            <h6>숙련된 전문왁서가 안전하고 효과적인 수준높은 서비스를 제공합니다</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="overlayimg-item">
+                    <img src="/img/main/oneex.jpg" alt="이미지 1">
+                    <div class="title-overlay"><h3>JBWA</h3></div>
+                    <div class="background-overlay1">
+                        <div class="text-overlay">
+                            <h3>JBWA</h3>
+                            <h5>Japan brazilian <br> Wax Association</h5>
+                            <h6>일본 브라질리언왁싱협회에 가입한 <br> 공식인증 왁싱전문샵</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="overlayimg-item">
+                    <img src="/img/main/treex.jpg" alt="이미지 4">
+                    <div class="title-overlay"><h3>CLEAN</h3></div>
+                    <div class="background-overlay1">
+                        <div class="text-overlay">
+                            <h3>JBWA</h3>
+                            <h5>Japan brazilian <br> Wax Association</h5>
+                            <h6>일본 브라질리언왁싱협회에 가입한 <br> 공식인증 왁싱전문샵</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="overlayimg-item">
+                    <img src="/img/main/green.png" alt="이미지 5">
+                    <div class="title-overlay"><h3>JBWA</h3></div>
+                    <div class="background-overlay1">
+                        <div class="text-overlay">
+                            <h3>JBWA</h3>
+                            <h5>Japan brazilian <br> Wax Association</h5>
+                            <h6>일본 브라질리언왁싱협회에 가입한 <br> 공식인증 왁싱전문샵</h6>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
 </section>
 
 <!-- 🔹 페이지 전용 JS -->

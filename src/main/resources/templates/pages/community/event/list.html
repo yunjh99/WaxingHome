@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default-layout}">
+
+<head>
+    <title>메인</title>
+    <meta name="description" content="스몰왁싱 이벤트 페이지">
+    <!-- 🔹 페이지 전용 CSS -->
+    <th:block layout:fragment="pageCss">
+        <link rel="stylesheet" th:href="@{/css/pages/community/event/list.css}">
+    </th:block>
+</head>
+<body>
+<!-- 상단 이미지 영역 fragment -->
+<section layout:fragment="section-top">
+    <div class="page-hero">
+        <!-- 이미지 없는 상단 -->
+        <div class="page-hero__no-img">
+            <nav class="page-nav">
+                <ul class="page-nav__list">
+                    <li class="page-nav__item page-nav__item--active">
+                        <a class="page-nav__link" th:href="@{/community/event/list}">이벤트</a>
+                    </li>
+                    <li class="page-nav__item">
+                        <a class="page-nav__link" th:href="@{#}">공지사항</a>
+                    </li>
+                    <li class="page-nav__item">
+                        <a class="page-nav__link" th:href="@{#}">자주묻는질문</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="page-hero__info">
+        <h1 class="page-hero__title">이벤트</h1>
+        <p class="page-hero__subtitle">EVENT</p>
+    </div>
+</section>
+
+
+<section layout:fragment="content">
+    <div class="content">
+
+        <!-- 이벤트 목록 -->
+        <div class="event-list">
+
+            <!-- 상단 헤더(타이틀 + 글쓰기) -->
+            <div class="event-list__header">
+                <h2 class="event-list__title">진행 중 이벤트</h2>
+
+                <!-- ✅ 글쓰기 버튼 -->
+                <a class="event-list__write"
+                   th:href="@{/community/event/form}">
+                    글쓰기
+                </a>
+            </div>
+
+            <!-- 데이터가 없을 때 -->
+            <div class="event-empty" th:if="${events == null or #lists.isEmpty(events.content)}">
+                진행 중인 이벤트가 없습니다.
+            </div>
+
+            <!-- 카드 리스트 -->
+            <ul class="event-cards" th:if="${events != null and !#lists.isEmpty(events.content)}">
+                <li class="event-card" th:each="event : ${events.content}">
+                    <a class="event-card__link"
+                       th:href="@{/view/community/event/{id}(id=${event.id})}">
+
+                        <!-- 썸네일 -->
+                        <div class="event-card__thumb">
+                            <img class="event-card__img"
+                                 th:src="${event.thumbnailUrl}"
+                                 th:alt="${event.title}" />
+                        </div>
+
+                        <!-- 텍스트 -->
+                        <div class="event-card__body">
+                            <h3 class="event-card__title" th:text="${event.title}">이벤트 제목</h3>
+                            <p class="event-card__date">
+                                <span th:text="${#temporals.format(event.startDate, 'yyyy.MM.dd')}">2025.01.01</span>
+                                ~
+                                <span th:text="${#temporals.format(event.endDate, 'yyyy.MM.dd')}">2025.01.31</span>
+                            </p>
+                        </div>
+
+                    </a>
+                </li>
+            </ul>
+
+            <!-- 페이지네이션 -->
+            <nav class="pagination" th:if="${events != null and events.totalPages > 1}">
+                <ul class="pagination__list">
+
+                    <!-- 이전 -->
+                    <li class="pagination__item" th:classappend="${events.first} ? 'is-disabled'">
+                        <a class="pagination__link"
+                           th:href="${events.first} ? '#' : @{/view/community/event(page=${events.number - 1})}">
+                            이전
+                        </a>
+                    </li>
+
+                    <!-- 페이지 번호 -->
+                    <li class="pagination__item"
+                        th:each="p : ${#numbers.sequence(0, events.totalPages - 1)}"
+                        th:classappend="${p == events.number} ? 'is-active'">
+                        <a class="pagination__link"
+                           th:href="@{/view/community/event(page=${p})}"
+                           th:text="${p + 1}">1</a>
+                    </li>
+
+                    <!-- 다음 -->
+                    <li class="pagination__item" th:classappend="${events.last} ? 'is-disabled'">
+                        <a class="pagination__link"
+                           th:href="${events.last} ? '#' : @{/view/community/event(page=${events.number + 1})}">
+                            다음
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+    <!-- 🔹 페이지 전용 JS -->
+    <th:block layout:fragment="pageScript">
+        <script th:src="@{/js/pages/community/event.js}" defer></script>
+    </th:block>
+</section>
+</body>
+</html>
