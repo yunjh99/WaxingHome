@@ -56,12 +56,8 @@ public class EventService {
      * - thumbnail/body 이미지가 있으면 UploadFile 저장 후 EventImage로 연결
      */
     @Transactional
-    public Long create(User user,
-                       EventCreateRequest request,
-                       MultipartFile thumbnail,
-                       MultipartFile bodyImage) {
+    public Long create(User user, EventCreateRequest request) {
 
-        // 1) 이벤트 엔티티 생성
         Event event = Event.create(
                 user,
                 request.getTitle(),
@@ -70,21 +66,22 @@ public class EventService {
                 request.getEndDate()
         );
 
-        // 2) 썸네일 저장 + 연결
-        if (thumbnail != null && !thumbnail.isEmpty()) {
-            UploadFile thumbFile = fileStorageService.store(thumbnail, "event");
-            EventImage.create(event, EventImageType.THUMBNAIL, thumbFile);
-        }
+        saveImages(event, request);
 
-        // 3) 본문 이미지 저장 + 연결
-        if (bodyImage != null && !bodyImage.isEmpty()) {
-            UploadFile bodyFile = fileStorageService.store(bodyImage, "event");
-            EventImage.create(event, EventImageType.BODY, bodyFile);
-        }
-
-        // 4) 저장 (Event -> EventImage -> UploadFile cascade로 같이 저장됨)
-        Event saved = eventRepository.save(event);
-        return saved.getId();
+        return eventRepository.save(event).getId();
     }
+
+    private void saveImages(Event event, EventCreateRequest request) {
+        saveImageIfPresent(event, request.getThumbnail(), EventImageType.THUMBNAIL);
+        saveImageIfPresent(event, request.getBodyImage(), EventImageType.BODY);
+    }
+
+    private void saveImageIfPresent(Event event, MultipartFile file, EventImageType type) {
+        if (file == null || file.isEmpty()) return;
+
+        UploadFile uploadFile = fileStorageService.store(file, "event");
+        EventImage.create(event, type, uploadFile);
+    }
+
 
 }

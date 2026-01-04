@@ -10,6 +10,7 @@
     <th:block layout:fragment="pageCss">
         <link rel="stylesheet" th:href="@{/css/pages/community/event/form.css}">
         <link rel="stylesheet" th:href="@{/css/pages/community/common.css}">
+
     </th:block>
 </head>
 <body>
@@ -21,7 +22,7 @@
             <nav class="page-nav">
                 <ul class="page-nav__list">
                     <li class="page-nav__item page-nav__item--active">
-                        <a class="page-nav__link" th:href="@{/community/event/list}">이벤트</a>
+                        <a class="page-nav__link" th:href="@{/community/events}">이벤트</a>
                     </li>
                     <li class="page-nav__item">
                         <a class="page-nav__link" th:href="@{#}">공지사항</a>
@@ -43,10 +44,10 @@
     <div class="content">
         <!-- --- -->
         <!-- write 공간 -->
-        <div class="post-body">
-            <div class="form-box">
-                <div class="newswriteform">
-                    <form th:action="${event == null} ? '/event/write' : '/event/update/' + ${event.id}"
+        <div class="event-form">
+            <div class="event-form__body">
+                <div class="form-card">
+                    <form th:action="${event == null} ? '/community/events' : '/community/events' + ${event.id}"
                           method="post" id="eventwriteform" enctype="multipart/form-data">
 
                         <div class="eventswrite-container">
@@ -84,24 +85,71 @@
                             </div>
 
                             <div class="input-group no-flex">
-                                <div class="input-item">
-                                    <label>파일첨부</label>
-                                    <input type="text" id="imageInput" placeholder="최대 3개까지 업로드 가능합니다." readonly>
-                                    <label for="image" class="file-upload-label">파일 첨부</label>
-                                    <input type="file" id="image" name="image" accept="image/*" multiple style="display: none;">
 
-                                    <p id="file-warning" style="color: red; display: none;"></p>
+                                <!-- 썸네일 -->
+                                <div class="input-item">
+                                    <label for="thumbnail">썸네일</label>
+
+                                    <input type="text" id="thumbnailInput"
+                                           placeholder="썸네일 1개 업로드 (예: 570x570)"
+                                           readonly>
+
+                                    <label for="thumbnail" class="file-upload-label">썸네일 첨부</label>
+
+                                    <input type="file"
+                                           id="thumbnail"
+                                           name="thumbnail"
+                                           accept="image/*"
+                                           style="display:none;">
+
+                                    <p id="thumbnail-warning" style="color:red; display:none;"></p>
                                 </div>
-                                <!-- 첨부된 파일 목록 표시 -->
+
+                                <!-- 썸네일 기존/미리보기 표시 -->
                                 <div class="input-item">
                                     <label></label>
-                                    <div id="fileList" class="file-list">
-                                        <ul id="existingFilesList" class="existingFiles-List">
-                                            <!-- 기존 파일 목록이 여기에 동적으로 추가됩니다. -->
+                                    <div class="file-list">
+                                        <ul id="existingThumbnailList" class="existingFiles-List">
+                                            <!-- 기존 썸네일이 있으면 여기에 -->
                                         </ul>
                                     </div>
                                 </div>
+
                             </div>
+
+                            <div class="input-group no-flex">
+
+                                <!-- 본문 이미지 -->
+                                <div class="input-item">
+                                    <label for="bodyImage">본문 이미지</label>
+
+                                    <input type="text" id="bodyImageInput"
+                                           placeholder="본문 이미지 1개 업로드 (예: width 1200)"
+                                           readonly>
+
+                                    <label for="bodyImage" class="file-upload-label">본문 이미지 첨부</label>
+
+                                    <input type="file"
+                                           id="bodyImage"
+                                           name="bodyImage"
+                                           accept="image/*"
+                                           style="display:none;">
+
+                                    <p id="bodyImage-warning" style="color:red; display:none;"></p>
+                                </div>
+
+                                <!-- 본문 이미지 기존/미리보기 표시 -->
+                                <div class="input-item">
+                                    <label></label>
+                                    <div class="file-list">
+                                        <ul id="existingBodyImageList" class="existingFiles-List">
+                                            <!-- 기존 본문 이미지가 있으면 여기에 -->
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+
 
                             <div class="input-item submit-button-wrapper">
                                 <button type="submit" class="submit-button" id="submit-button"
@@ -115,6 +163,9 @@
 
         </div>
     </div>
+ <!-- 🔹 페이지 전용 JS -->
+    <th:block layout:fragment="pageScript">
+        <script th:src="@{/js/pages/community/event.js}" defer></script>
     </th:block>
 </section>
 </body>

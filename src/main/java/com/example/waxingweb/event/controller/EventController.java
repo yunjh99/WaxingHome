@@ -13,18 +13,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/community/event")
+@RequestMapping("/community/events")
 public class EventController {
 
     private final EventService eventService;
 
 
     // 진행중인 이벤트
-    @GetMapping("/list")
+    @GetMapping
     public String list(Model model,
                        @PageableDefault(size = 8) Pageable pageable) {
 
@@ -34,35 +34,39 @@ public class EventController {
         return "pages/community/event/list";
     }
 
-    // 글 작성 & 수정 페이지
-    @GetMapping("/form")
-    public String eventForm() { return "pages/community/event/form"; }
-
-
 
     // 종료된 이벤트
-    @GetMapping("Expired")
+    @GetMapping("/expired")
     public String getEndedEvents(Model model,
-                       @PageableDefault(size=8) Pageable pageable) {
+                                 @PageableDefault(size=8) Pageable pageable) {
 
         Page<Event> events = eventService.getExpiredEvents(pageable);
         model.addAttribute("events", events);
 
         return "pages/community/event";
+
     }
 
+    // 이벤트 생성
     @PostMapping
     public String create(
-            @Valid EventCreateRequest request,
-            BindingResult bindingResult,
-            @RequestParam(required = false) MultipartFile thumbnail,
-            @RequestParam(required = false) MultipartFile bodyImage
-    ) {
+            @Valid  @ModelAttribute EventCreateRequest request,
+            BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "pages/community/event-form";
         }
-        return "redirect:/event";
+
+        // 이벤트를 생성하고, event ID를 반환받음
+        Long eventId = eventService.create(null, request);
+
+        // 이벤트 생성 후 해당 게시글 상세로 리다이렉트
+        return "redirect:/community/events/" + eventId;
     }
+
+
+    // 이벤트 작성 & 수정 페이지
+    @GetMapping("/form")
+    public String eventForm() { return "pages/community/event/form"; }
 
 
 }

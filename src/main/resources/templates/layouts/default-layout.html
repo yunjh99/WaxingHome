@@ -34,9 +34,10 @@
     <main class="content-wrapper">
         <section layout:fragment="content">
             <!-- 자식 템플릿에서 채워짐 -->
+            <!-- 🔹 페이지별 JS (없으면 무시됨) -->
+            <th:block layout:fragment="pageScript"></th:block>
         </section>
     </main>
-
 </div>
 
 <!-- 🔹 공통 푸터 -->

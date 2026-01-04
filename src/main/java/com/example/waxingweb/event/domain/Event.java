@@ -5,6 +5,7 @@ import com.example.waxingweb.user.domain.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -28,7 +29,7 @@ public class Event {
 
 
     @ManyToOne(fetch = FetchType.LAZY) // LAZY: 이벤트 조회 시 작성자 정보는 필요할 때만 조회
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = true)
     private User user; // 작성자
 
     @NotBlank // 사용자 입력 검증: null, 빈 문자열, 공백만 입력 모두 허용하지 않음
@@ -64,6 +65,7 @@ public class Event {
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<EventImage> images = new ArrayList<>();
+
 
     public static Event create(User user, String title, String content,
                                LocalDate startDate, LocalDate endDate) {
