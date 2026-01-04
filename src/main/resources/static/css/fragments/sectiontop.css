@@ -1,0 +1,89 @@
+.page-hero {
+    width: 100%;
+    overflow: hidden;
+}
+
+/* 이미지 있는 hero */
+.page-hero__img {
+    width: 100%;
+    height: 810px;
+    background-color: #c75e5e;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/* 이미지 없는 hero */
+.page-hero__no-img {
+    width: 100%;
+    height: 75px;
+    background-color: #c75e5e;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/* 상단 공통 네비 */
+.page-nav {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* nav list */
+.page-nav__list {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+/* nav link */
+.page-nav__link {
+    display: block;
+    padding: 15px 40px;
+    background-color: rgba(20, 20, 20, 0.95);
+    color: #bbb;
+    text-decoration: none;
+    font-weight: bold;
+    border-bottom: 3px solid transparent;
+    transition: color 0.3s;
+}
+
+.page-nav__link:hover {
+    color: #fff;
+}
+
+/* active 상태 */
+.page-nav__item--active .page-nav__link {
+    background-color: #fff;
+    color: rgba(40, 40, 40, 0.95);
+}
+
+/* 타이틀 영역 */
+.page-hero__info {
+    height: 220px;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+
+.page-hero__title {
+    font-size: 35px;
+}
+
+.page-hero__subtitle {
+    font-size: 19px;
+    color: #c75e5e;
+}

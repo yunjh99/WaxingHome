@@ -6,9 +6,12 @@
 <head>
     <meta charset="UTF-8" />
     <title layout:title-pattern="스몰왁싱 | $CONTENT_TITLE">스몰왁싱</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 공통 config (CSS · JS 로드 등 설정) -->
     <th:block th:replace="~{fragments/config :: configFragment}"></th:block>
+
+    <!-- 🔹 페이지별 CSS (없으면 무시됨) -->
+    <th:block layout:fragment="pageCss"></th:block>
 </head>
 
 <body>
@@ -24,13 +27,17 @@
            th:replace="~{fragments/side-nav :: sideNavFragment}">
     </aside>
 
+    <!-- ★ 이 자리에 추가 ★ -->
+    <div layout:fragment="section-top"></div>
+
     <!-- 🔹 메인 콘텐츠(페이지마다 바뀌는 부분) -->
     <main class="content-wrapper">
         <section layout:fragment="content">
             <!-- 자식 템플릿에서 채워짐 -->
+            <!-- 🔹 페이지별 JS (없으면 무시됨) -->
+            <th:block layout:fragment="pageScript"></th:block>
         </section>
     </main>
-
 </div>
 
 <!-- 🔹 공통 푸터 -->

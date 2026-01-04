@@ -5,6 +5,7 @@ import com.example.waxingweb.user.domain.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -12,6 +13,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity // JPA 관리 대상 엔티티
 @Getter // 엔티티 조회용 Getter 제공
@@ -26,7 +29,7 @@ public class Event {
 
 
     @ManyToOne(fetch = FetchType.LAZY) // LAZY: 이벤트 조회 시 작성자 정보는 필요할 때만 조회
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = true)
     private User user; // 작성자
 
     @NotBlank // 사용자 입력 검증: null, 빈 문자열, 공백만 입력 모두 허용하지 않음
@@ -60,12 +63,21 @@ public class Event {
     @JoinColumn(name = "deleted_by")
     private User deletedBy; // 삭제한 유저
 
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EventImage> images = new ArrayList<>();
 
-    @Column(length = 500)
-    private String thumbnailPath; // 썸네일
 
-    @Column(length = 500)
-    private String bodyImagePath; // 본문 이미지
+    public static Event create(User user, String title, String content,
+                               LocalDate startDate, LocalDate endDate) {
+        Event event = new Event();
+        event.user = user;
+        event.title = title;
+        event.content = content;
+        event.startDate = startDate;
+        event.endDate = endDate;
+        return event;
+    }
+
 
     // 삭제
     public void delete(User admin) {
@@ -94,17 +106,19 @@ public class Event {
         return !today.isBefore(startDate) && !today.isAfter(endDate);
     }
 
-    public static Event create(User user, String title, String content,
-                               LocalDate startDate, LocalDate endDate) {
-        Event event = new Event();
-        event.user = user;
-        event.title = title;
-        event.content = content;
-        event.startDate = startDate;
-        event.endDate = endDate;
-        return event;
+    public void addImage(EventImage image) {
+        this.images.add(image);
+        // EventImage가 event를 갖도록 보장(혹시 나중에 create 로직이 바뀌어도 안전)
+        // 단, EventImage에 setEvent가 없으니 create 패턴으로 통일하는 게 더 좋긴 함.
     }
 
+
+    public EventImage getImage(EventImageType type) {
+        return images.stream()
+                .filter(i -> i.getType() == type)
+                .findFirst()
+                .orElse(null);
+    }
 
 }
 

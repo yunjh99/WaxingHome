@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 
@@ -26,6 +27,10 @@ public class EventCreateRequest {
     @NotNull(message = "종료일은 필수입니다.")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
+
+    // ✅ 파일은 검증 어노테이션 보통 안 붙임(필요하면 커스텀)
+    private MultipartFile thumbnail;
+    private MultipartFile bodyImage;
 
     @AssertTrue(message = "종료일은 시작일보다 빠를 수 없습니다.")
     public boolean isValidPeriod() {
