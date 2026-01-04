@@ -1,0 +1,149 @@
+/* ===== Layout ===== */
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 16px;
+}
+
+.event-list {
+    width: 100%;
+}
+
+/* ===== Header ===== */
+.event-list__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.event-list__title {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.event-list__write {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 14px;
+    background: #c75e5e;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 8px;
+}
+
+/* ===== Empty ===== */
+.event-empty {
+    padding: 24px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    text-align: center;
+    color: #666;
+}
+
+/* ===== Cards ===== */
+.event-cards {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.event-card__link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.event-card {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #eee;
+    background: #fff;
+}
+
+.event-card__thumb {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* 570x570 느낌 */
+    background: #000;
+    overflow: hidden;
+}
+
+.event-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.25s ease;
+}
+
+.event-card:hover .event-card__img {
+    transform: scale(1.06);
+}
+
+.event-card__body {
+    padding: 14px 16px 16px;
+}
+
+.event-card__title {
+    margin: 0 0 10px;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.event-card__date {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+}
+
+/* ===== Pagination ===== */
+.pagination {
+    margin-top: 28px;
+}
+
+.pagination__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination__item.is-disabled .pagination__link {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+.pagination__item.is-active .pagination__link {
+    background: #c75e5e;
+    color: #fff;
+    border-color: #c75e5e;
+}
+
+.pagination__link {
+    display: inline-flex;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 10px;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #222;
+    font-weight: 700;
+}
+
