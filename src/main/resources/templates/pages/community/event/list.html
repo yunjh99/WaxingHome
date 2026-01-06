@@ -97,7 +97,7 @@
                     <!-- 이전 -->
                     <li class="pagination__item" th:classappend="${events.first} ? 'is-disabled'">
                         <a class="pagination__link"
-                           th:href="${events.first} ? '#' : @{/view/community/event(page=${events.number - 1})}">
+                           th:href="${events.first} ? '#' : '/view/community/event?page=' + (events.number - 1)">
                             이전
                         </a>
                     </li>
@@ -114,7 +114,7 @@
                     <!-- 다음 -->
                     <li class="pagination__item" th:classappend="${events.last} ? 'is-disabled'">
                         <a class="pagination__link"
-                           th:href="${events.last} ? '#' : @{/view/community/event(page=${events.number + 1})}">
+                           th:href="${events.last} ? '#' : '/view/community/event?page=' + (events.number + 1)">
                             다음
                         </a>
                     </li>
