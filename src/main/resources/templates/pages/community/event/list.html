@@ -47,17 +47,6 @@
         <!-- 이벤트 목록 -->
         <div class="event-list">
 
-            <!-- 상단 헤더(타이틀 + 글쓰기) -->
-            <div class="event-list__header">
-                <h2 class="event-list__title">진행 중 이벤트</h2>
-
-                <!-- ✅ 글쓰기 버튼 -->
-                <a class="event-list__write"
-                   th:href="@{/community/events/form}">
-                    글쓰기
-                </a>
-            </div>
-
             <!-- 데이터가 없을 때 -->
             <div class="event-empty" th:if="${events == null or #lists.isEmpty(events.content)}">
                 진행 중인 이벤트가 없습니다.
@@ -89,6 +78,16 @@
                     </a>
                 </li>
             </ul>
+
+
+            <!-- 상단 헤더(타이틀 + 글쓰기) -->
+            <div class="event-list__header">
+                <h2 class="event-list__title">진행 중 이벤트</h2>
+
+                <!-- ✅ 글쓰기 버튼 -->
+                <a class="event-list__write" th:href="@{/community/events/form}">글쓰기</a>
+            </div>
+
 
             <!-- 페이지네이션 -->
             <nav class="pagination" th:if="${events != null and events.totalPages > 1}">
